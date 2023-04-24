@@ -46,4 +46,6 @@ $conn->close();
 
 $a=0;
 
+print("test")
+
 ?>
