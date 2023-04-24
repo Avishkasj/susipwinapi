@@ -1,11 +1,9 @@
 <?php
-// Retrieve the QR code value passed from the previous page
-$qr_code_value = $_GET['qr_code'];
+// Retrieve the scanned QR code data.
+$data = $_POST['data'];
 
-// Process the QR code value (example code)
-if ($qr_code_value == null) {
-  echo 'QR code value is null';
-} else {
-  echo 'QR code value is notnull';
-}
+// Do something with the data.
+
+// Send a response to the client.
+echo "Received data: " . $data;
 ?>
