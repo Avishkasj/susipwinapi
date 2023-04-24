@@ -44,5 +44,6 @@ echo json_encode($response);
 // Close the database connection
 $conn->close();
 
+$a=0;
 
 ?>
