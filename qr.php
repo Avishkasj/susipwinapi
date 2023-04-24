@@ -1,9 +1,17 @@
 <?php
-// Retrieve the scanned QR code data.
-$data = $_POST['data'];
 
-// Do something with the data.
+if (isset($_POST['data'])) {
+  // Data has been received
+  $qr_data = $_POST['data'];
+  
+  // Process the data here
+  // ...
+  
+  // Return a response if necessary
+  echo "Data received: " . $qr_data;
+} else {
+  // No data received
+  echo "No data received";
+}
 
-// Send a response to the client.
-echo "Received data: " . $data;
 ?>
