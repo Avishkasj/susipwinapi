@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $code = $_POST['code'];
 // Do something with $code
 
-
+echo $code;
 
 echo $code;
 ?>
