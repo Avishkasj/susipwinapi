@@ -1,4 +1,3 @@
 # susipwinapi
 
-
-thsi api for susipwin mobile application
+API for susipwin mobile application
