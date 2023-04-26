@@ -47,7 +47,7 @@ if(isset($_POST['data'])) {
     WHERE t2.studentId = '$user_id';
     ";
 
-    $result2 = $conn->query($sql);
+    $result2 = $conn->query($sql2);
 
     $data2 = array();
         if ($result2->num_rows > 0) {
@@ -57,10 +57,10 @@ if(isset($_POST['data'])) {
         }
 
 
-      //   $data = array(
-      //     'data' => $data,
-      //     'data2' => $data2
-      //  );
+        $data = array(
+          'data' => $data,
+          'data2' => $data2
+       );
 
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
