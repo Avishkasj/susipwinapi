@@ -41,11 +41,13 @@ if(isset($_POST['data'])) {
 
 
     //registerd course 
-    $sql2 = "SELECT t1.coursename
-    FROM courses t1
-    INNER JOIN coursestudents t2 ON t1.id = t2.courseId
-    WHERE t2.studentId = '$user_id';
-    ";
+    // $sql2 = "SELECT t1.coursename
+    // FROM courses t1
+    // INNER JOIN coursestudents t2 ON t1.id = t2.courseId
+    // WHERE t2.studentId = '$user_id';
+    // ";
+
+    $sql2="SELECT coursename FROM courses WHERE courseid='ET2025'";
 
     $result2 = $conn->query($sql2);
 
@@ -57,14 +59,14 @@ if(isset($_POST['data'])) {
         }
 
 
-        $data = array(
+        $data1 = array(
           'data' => $data,
           'data2' => $data2
        );
 
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
-    echo json_encode($data);
+    echo json_encode($data1);
 
 } else {
     // No data received
