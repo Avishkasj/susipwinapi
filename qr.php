@@ -13,9 +13,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Set the default timezone to avoid any warning
-date_default_timezone_set('Asia/Colombo');
-
 // Retrieve the data sent from the mobile app
 if(isset($_POST['data'])) {
     $json_data = $_POST['data'];
@@ -25,37 +22,37 @@ if(isset($_POST['data'])) {
     
     // Assign each value to a separate variable
     $user_id = $data['userid'];
+    // $course_id = $data['courses'];
+    // $id = $data['id'];
     
-    // Prepare the SQL statement to retrieve the student's name
-    $stmt = $conn->prepare("SELECT sfullname FROM students WHERE userId = ?");
-    $stmt->bind_param("s", $user_id);
-    $stmt->execute();
+    // Process the data here
+    // ...
     
-    // Get the result of the SQL query
-    $result = $stmt->get_result();
-    
-    // Convert the data to a JSON array
-    $data = array();
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-    }
-    
-    // Send the JSON response back to the Flutter app
-    header('Content-Type: application/json');
-    echo json_encode($data);
-    
-    // Close the prepared statement
-    $stmt->close();
+    // Send a response back to the mobile app
+    $response = array('message' => 'Data received: ' . $json_data);
+    echo json_encode($response);
 } else {
     // No data received
     $response = array('error' => 'No data received');
     echo json_encode($response);
 }
 
+$sql = "SELECT sfullname FROM students WHERE userId='$user_id'";
+$result = $conn->query($sql);
+
+// Convert the data to a JSON array
+$data = array();
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+}
+//
+// Send the JSON response back to the Flutter app
+header('Content-Type: application/json');
+echo json_encode($data);
+
 // Close the database connection
 $conn->close();
 
 ?>
-
