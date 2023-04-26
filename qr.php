@@ -39,9 +39,32 @@ if(isset($_POST['data'])) {
         }
     }
 
+
+    //registerd course 
+    $sql2 = "SELECT t1.coursename
+    FROM courses t1
+    INNER JOIN coursestudents t2 ON t1.id = t2.courseId
+    WHERE t2.studentId = '$user_id';
+    ";
+
+    $result2 = $conn->query($sql);
+
+    $data2 = array();
+        if ($result2->num_rows > 0) {
+            while($row = $result2->fetch_assoc()) {
+                $data2[] = $row;
+            }
+        }
+
+
+
+
+
+
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
     echo json_encode($data);
+    echo json_encode($data2);
 } else {
     // No data received
     $response = array('error' => 'No data received');
