@@ -32,20 +32,20 @@ if(isset($_POST['data'])) {
 }
 
 
-$sql = "SELECT sfullname FROM students ";
+$sql = "SELECT sfullname FROM students WHERE id=8";
 $result = $conn->query($sql);
 
 // Convert the data to a JSON array
-$data = array();
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
-}
+// $data = array();
+// if ($result->num_rows > 0) {
+//     while($row = $result->fetch_assoc()) {
+//         $data[] = $row;
+//     }
+// }
 
 // Send the JSON response back to the Flutter app
 header('Content-Type: application/json');
-echo json_encode($data);
+echo json_encode($result);
 
 // Close the database connection
 $conn->close();
