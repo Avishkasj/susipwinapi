@@ -57,10 +57,10 @@ if(isset($_POST['data'])) {
         }
 
 
-        $data = array(
-          'data' => $data,
-          'data2' => $data2
-       );
+      //   $data = array(
+      //     'data' => $data,
+      //     'data2' => $data2
+      //  );
 
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
