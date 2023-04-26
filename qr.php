@@ -28,7 +28,7 @@ if(isset($_POST['data'])) {
     // Process the data here
     // ...
     
-    $sql = "SELECT sfullname FROM students WHERE userId='$user_id'";
+    $sql = "SELECT * FROM students WHERE userId='$user_id'";
     $result = $conn->query($sql);
 
     // Convert the data to a JSON array
