@@ -57,14 +57,15 @@ if(isset($_POST['data'])) {
         }
 
 
-
-
-
+        $data = array(
+          'data' => $data,
+          'data2' => $data2
+       );
 
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
     echo json_encode($data);
-    echo json_encode($data2);
+
 } else {
     // No data received
     $response = array('error' => 'No data received');
