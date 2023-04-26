@@ -28,29 +28,25 @@ if(isset($_POST['data'])) {
     // Process the data here
     // ...
     
-    // Send a response back to the mobile app
-    $response = array('message' => 'Data received: ' . $json_data);
-    echo json_encode($response);
+    $sql = "SELECT sfullname FROM students WHERE userId='$user_id'";
+    $result = $conn->query($sql);
+
+    // Convert the data to a JSON array
+    $data = array();
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+    }
+
+    // Send the JSON response back to the Flutter app
+    header('Content-Type: application/json');
+    echo json_encode($data);
 } else {
     // No data received
     $response = array('error' => 'No data received');
     echo json_encode($response);
 }
-
-$sql = "SELECT sfullname FROM students WHERE userId='$user_id'";
-$result = $conn->query($sql);
-
-// Convert the data to a JSON array
-$data = array();
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
-}
-//
-// Send the JSON response back to the Flutter app
-header('Content-Type: application/json');
-echo json_encode($data);
 
 // Close the database connection
 $conn->close();
