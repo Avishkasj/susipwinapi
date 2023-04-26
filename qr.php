@@ -32,7 +32,7 @@ if(isset($_POST['data'])) {
 }
 
 
-$sql = "SELECT sfullname FROM students WHERE id='$user_id'";
+$sql = "SELECT sfullname FROM students WHERE id=$user_id";
 $result = $conn->query($sql);
 
 // Convert the data to a JSON array
