@@ -37,7 +37,7 @@ if(isset($_POST['data'])) {
     // WHERE t2.studentId = '$user_id';
     // ";
 
-     $sql2="SELECT coursename FROM courses ";
+     $sql2="SELECT coursename FROM courses";
 
     $result2 = $conn->query($sql2);
 
