@@ -1,5 +1,5 @@
 <?php
-include 'login.php';
+
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
