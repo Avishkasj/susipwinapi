@@ -47,13 +47,13 @@ if(isset($_POST['data'])) {
         echo json_encode($data3);
     } else {
         // No rows were returned
-        $response = array('error' => 'No data found');
-        echo json_encode($response);
+        $response3 = array('error' => 'No data found');
+        echo json_encode($response3);
     }
 } else {
     // No data received
-    $response = array('error' => 'No data received');
-    echo json_encode($response);
+    $response3 = array('error' => 'No data received');
+    echo json_encode($response3);
 }
 
 // Close the database connection
