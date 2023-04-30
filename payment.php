@@ -1,4 +1,5 @@
 <?php
+include 'login.php';
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
@@ -25,8 +26,15 @@ if(isset($_POST['data'])) {
     // Process the data here
     // ...
 
+    $sql2= "SELECT courses.id 
+    FROM courses 
+    INNER JOIN payments 
+    ON courses.id = payments.cid 
+    WHERE courses.coursename = '$selectedOption'
+    ";
+
     // Fetch the data from the database
-    $sql = "SELECT * FROM courses WHERE coursename = 'Advance Level ICT 2025'";
+    $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
     $result = $conn->query($sql);
 
     // Check if any rows were returned
