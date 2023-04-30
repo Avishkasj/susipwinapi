@@ -1,5 +1,4 @@
 <?php
-
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
@@ -25,13 +24,6 @@ if(isset($_POST['data'])) {
 
     // Process the data here
     // ...
-
-    // $sql2= "SELECT courses.id 
-    // FROM courses 
-    // INNER JOIN payments 
-    // ON courses.id = payments.cid 
-    // WHERE courses.coursename = '$selectedOption'
-    // ";
 
     // Fetch the data from the database
     $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
@@ -63,8 +55,6 @@ if(isset($_POST['data'])) {
     $response = array('error' => 'No data received');
     echo json_encode($response);
 }
-
-//
 
 // Close the database connection
 $conn->close();
