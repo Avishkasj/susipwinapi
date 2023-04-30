@@ -1,5 +1,4 @@
 <?php
-
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
@@ -19,44 +18,38 @@ if(isset($_POST['data'])) {
 
     // Decode the JSON data into a PHP associative array
     $data = json_decode($json_data, true);
-    
-    // Assign each value to a separate variable
-    // $user_id = $data['userid'];
-    // $course_id = $data['courses'];
-    // $id = $data['id'];
-    
+
+    // Assign the value to a variable
+    $selectedOption = $data['selectedOption'];
+
     // Process the data here
     // ...
-    
-   
 
-    // registerd course 
-    // $sql3 = "SELECT id FROM courses WHERE coursename = '$data'   
-    // ";
+    // Fetch the data from the database
+    $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
+    $result = $conn->query($sql);
 
-    $data3 = "hello test";
+    // Check if any rows were returned
+    if ($result->num_rows > 0) {
+        // Fetch the row as an associative array
+        $row = $result->fetch_assoc();
 
-    //  $sql2="SELECT coursename FROM courses";
+        // Create an array containing the relevant data
+        $data3 = array(
+            'id' => $row['id'],
+            'coursename' => $row['coursename'],
+            'description' => $row['description'],
+            // Add any other fields you want to include here
+        );
 
-    // $result3 = $conn->query($sql3);
-
-    // $data3 = array();
-    //     if ($result3->num_rows > 0) {
-    //         while($row = $result3->fetch_assoc()) {
-    //             $data3[] = $row;
-    //         }
-    //     }
-
-
-      //   $data1 = array(
-      //     'data' => $data,
-      //     'data2' => $data2
-      //  );
-
-    // Send the JSON response back to the Flutter app
-    header('Content-Type: application/json');
-    echo json_encode($data3);
-
+        // Send the JSON response back to the Flutter app
+        header('Content-Type: application/json');
+        echo json_encode($data3);
+    } else {
+        // No rows were returned
+        $response = array('error' => 'No data found');
+        echo json_encode($response);
+    }
 } else {
     // No data received
     $response = array('error' => 'No data received');
@@ -65,5 +58,4 @@ if(isset($_POST['data'])) {
 
 // Close the database connection
 $conn->close();
-
 ?>
