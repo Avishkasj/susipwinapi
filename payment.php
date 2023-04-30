@@ -31,19 +31,21 @@ if(isset($_POST['data'])) {
    
 
     // registerd course 
-    $sql3 = "SELECT id FROM courses WHERE coursename = '$data'   
-    ";
+    // $sql3 = "SELECT id FROM courses WHERE coursename = '$data'   
+    // ";
+
+    $data3 = "hello test";
 
     //  $sql2="SELECT coursename FROM courses";
 
-    $result3 = $conn->query($sql3);
+    // $result3 = $conn->query($sql3);
 
-    $data3 = array();
-        if ($result3->num_rows > 0) {
-            while($row = $result3->fetch_assoc()) {
-                $data3[] = $row;
-            }
-        }
+    // $data3 = array();
+    //     if ($result3->num_rows > 0) {
+    //         while($row = $result3->fetch_assoc()) {
+    //             $data3[] = $row;
+    //         }
+    //     }
 
 
       //   $data1 = array(
