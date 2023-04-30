@@ -30,14 +30,14 @@ if(isset($_POST['data'])) {
     
    
 
-    //registerd course 
-    // $sql2 = "SELECT t1.coursename
-    // FROM courses t1
-    // INNER JOIN coursestudents t2 ON t1.id = t2.courseId
-    // WHERE t2.studentId = '$user_id';
-    // ";
+    registerd course 
+    $sql2 = "SELECT t1.coursename
+    FROM courses t1
+    INNER JOIN coursestudents t2 ON t1.id = t2.courseId
+    WHERE t2.studentId = '$user_id';
+    ";
 
-     $sql2="SELECT coursename FROM courses";
+    //  $sql2="SELECT coursename FROM courses";
 
     $result2 = $conn->query($sql2);
 
