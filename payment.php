@@ -5,7 +5,7 @@ $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
-$uid = $_SESSION['user_id'];
+$uid = "8";
 
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
@@ -28,14 +28,14 @@ if(isset($_POST['data'])) {
     // $sql4 = "SELECT * FROM payments WHERE cid = '$sql3' AND suid='$sql2' AND month='5'";
 
 
-    // $sql = "SELECT p.* 
-    // FROM payments p 
-    // INNER JOIN students s ON p.suid = s.id 
-    // INNER JOIN courses c ON p.cid = c.id 
-    // WHERE s.userId = '$uid' 
-    // AND c.coursename = '$selectedOption'
-    // AND p.month = '5';
-    // ";
+    $sql = "SELECT p.* 
+    FROM payments p 
+    INNER JOIN students s ON p.suid = s.id 
+    INNER JOIN courses c ON p.cid = c.id 
+    WHERE s.userId = '$uid' 
+    AND c.coursename = '$selectedOption'
+    AND p.month = '5';
+    ";
 
 
 
@@ -43,7 +43,6 @@ if(isset($_POST['data'])) {
     // Fetch the data from the database
     // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
 
-    $sql = "SELECT * FROM students WHERE userId = '$user_id' ";
 
     $result = $conn->query($sql);
 
