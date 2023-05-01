@@ -18,6 +18,7 @@ if(isset($_POST['data'])) {
 
     // Process the data here
     // ...
+    //stable version
 
     // Fetch the data from the database
     $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
