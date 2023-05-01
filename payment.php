@@ -32,7 +32,7 @@ if(isset($_POST['data'])) {
     FROM payments p 
     INNER JOIN students s ON p.suid = s.id 
     INNER JOIN courses c ON p.cid = c.id 
-    WHERE s.userId = '$user_id' 
+    WHERE s.userId = '$uid' 
     AND c.coursename = '$selectedOption'
     AND p.month = '5';
     ";
