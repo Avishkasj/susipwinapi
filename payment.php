@@ -27,7 +27,7 @@ if(isset($_POST['data'])) {
     // ...
 
     // Fetch the data from the database
-    $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
+    $sql = "SELECT * FROM courses WHERE coursename = '$data'";
     $result = $conn->query($sql);
 
     // Check if any rows were returned
