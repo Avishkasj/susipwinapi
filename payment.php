@@ -1,7 +1,4 @@
 <?php
-// session_start();
-// $user_id = $_SESSION['user_id'];
-
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
@@ -38,7 +35,7 @@ if(isset($_POST['data'])) {
         $row = $result->fetch_assoc();
 
         // Create an array containing the relevant data
-        $data = array(
+        $data3 = array(
             'id' => $row['id'],
             'coursename' => $row['coursename'],
             'description' => $row['description'],
@@ -47,7 +44,7 @@ if(isset($_POST['data'])) {
 
         // Send the JSON response back to the Flutter app
         header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode($data3);
     } else {
         // No rows were returned
         $response = array('error' => 'No data found');
