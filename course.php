@@ -1,4 +1,6 @@
 <?php
+session_start(); 
+
 
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
@@ -22,6 +24,8 @@ if(isset($_POST['data'])) {
     
     // Assign each value to a separate variable
     $user_id = $data['userid'];
+
+    $_SESSION['user_id'] = $user_id;
     // $course_id = $data['courses'];
     // $id = $data['id'];
     
