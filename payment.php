@@ -5,7 +5,7 @@ $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
-$uid = '1';
+$uid = "8";
 
 
 // Create a new MySQLi instance and connect to the database
@@ -33,7 +33,7 @@ if(isset($_POST['data'])) {
     FROM payments p 
     INNER JOIN students s ON p.suid = s.id 
     INNER JOIN courses c ON p.cid = c.id 
-    WHERE s.userId = (SELECT id FROM students WHERE userId = '$uid')  
+    WHERE s.userId = '$uid' 
     AND c.coursename = '$selectedOption'
     AND p.month = '5';
     ";
