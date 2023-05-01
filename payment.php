@@ -4,7 +4,6 @@ $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
-
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -15,13 +14,7 @@ if ($conn->connect_error) {
 
 // Retrieve the data sent from the mobile app
 if(isset($_POST['data'])) {
-    $json_data = $_POST['data'];
-
-    // Decode the JSON data into a PHP associative array
-    $data = json_decode($json_data, true);
-
-    // Assign the value to a variable
-    $selectedOption = $data;
+    $selectedOption = $_POST['data'];
 
     // Process the data here
     // ...
