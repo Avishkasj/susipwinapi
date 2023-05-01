@@ -1,11 +1,13 @@
 <?php
+require_once 'User.php';
 session_start();
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
-$uid = "8";
+$user = new User();
+$uid = $user->getUserId();;
 
 
 // Create a new MySQLi instance and connect to the database
