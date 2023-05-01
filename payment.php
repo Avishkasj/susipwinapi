@@ -39,7 +39,7 @@ if(isset($_POST['data'])) {
 
         // Create an array containing the relevant data
         $data3 = array(
-            'id' => $row['id'],
+            'id' => '11',
             'coursename' => $row['coursename'],
             'description' => $row['description'],
             // Add any other fields you want to include here
