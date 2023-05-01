@@ -1,5 +1,6 @@
 <?php
 session_start(); 
+require_once 'User.php';
 
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
