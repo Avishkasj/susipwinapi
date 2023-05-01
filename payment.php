@@ -1,4 +1,7 @@
 <?php
+session_start();
+$user_id = $_SESSION['user_id'];
+
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
