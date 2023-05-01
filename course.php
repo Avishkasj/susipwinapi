@@ -24,6 +24,8 @@ if(isset($_POST['data'])) {
     
     // Assign each value to a separate variable
     $user_id = $data['userid'];
+    $user = new User();
+    $user->setUserId($user_id);
 
     $_SESSION['user_id'] = $user_id;
     // $course_id = $data['courses'];
