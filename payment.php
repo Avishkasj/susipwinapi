@@ -23,8 +23,27 @@ if(isset($_POST['data'])) {
     // ...
     //stable version
 
+    // $sql2 = "SELECT id FROM students WHERE userId = '$user_id' ";
+    // $sql3 = "SELECT id FROM courses WHERE coursename = '$selectedOption'";
+    // $sql4 = "SELECT * FROM payments WHERE cid = '$sql3' AND suid='$sql2' AND month='5'";
+
+
+    $sql = "SELECT p.* 
+    FROM payments p 
+    INNER JOIN students s ON p.suid = s.id 
+    INNER JOIN courses c ON p.cid = c.id 
+    WHERE s.userId = '$user_id' 
+    AND c.coursename = '$selectedOption'
+    AND p.month = '5';
+    ";
+
+
+
+
     // Fetch the data from the database
-    $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
+    // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
+
+
     $result = $conn->query($sql);
 
     // Check if any rows were returned
@@ -35,8 +54,8 @@ if(isset($_POST['data'])) {
         // Create an array containing the relevant data
         $data3 = array(
             'id' => $row['id'],
-            'coursename' => $row['coursename'],
-            'description' => $row['description'],
+            'coursename' => $row['cid'],
+            'description' => $row['suid'],
             // Add any other fields you want to include here
         );
 
