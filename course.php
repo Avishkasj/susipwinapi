@@ -1,6 +1,9 @@
 <?php
 session_start(); 
 
+// Include the User class
+require_once 'User.php';
+
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
@@ -21,10 +24,12 @@ if(isset($_POST['data'])) {
     // Decode the JSON data into a PHP associative array
     $data = json_decode($json_data, true);
     
+    // Create a new User object and set the user ID
+    $user = new User();
+    $user->setUserId($_SESSION['user_id']);
+    
     // Assign each value to a separate variable
-    $user_id = $data['userid'];
-
-    $_SESSION['user_id'] = $user_id;
+    $user_id = $user->getUserId();
     // $course_id = $data['courses'];
     // $id = $data['id'];
     
@@ -33,7 +38,7 @@ if(isset($_POST['data'])) {
     
    
 
-    // registerd course 
+    // registered course 
     $sql2 = "SELECT t1.coursename
     FROM courses t1
     INNER JOIN coursestudents t2 ON t1.id = t2.courseId
