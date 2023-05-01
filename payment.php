@@ -7,7 +7,7 @@ $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
 $user = new User();
-$uid = $user->getUserId();;
+$uid = $user->getUserId();
 
 
 // Create a new MySQLi instance and connect to the database
