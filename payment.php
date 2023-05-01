@@ -4,6 +4,9 @@ $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
+session_start(); // Start the session
+$selectedOption = $_SESSION['selectedOption'];
+
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -26,7 +29,7 @@ if(isset($_POST['data'])) {
     // ...
 
     // Fetch the data from the database
-    $sql = "SELECT * FROM courses WHERE coursename = 'ET 2025 batch'";
+    $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
     $result = $conn->query($sql);
 
     // Check if any rows were returned

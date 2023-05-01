@@ -1,7 +1,8 @@
 <?php
-
+session_start(); 
 // Retrieve the selected_option parameter from the POST request
 $selectedOption = $_POST['selected_option'] ?? '';
+$_SESSION['selectedOption'] = $selectedOption;
 
 // Do something with the selected_option value (e.g. save it to a database)
 // ...
