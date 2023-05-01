@@ -4,8 +4,6 @@ $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
 $database = "encodeco_lms";
 
-session_start(); // Start the session
-$selectedOption = $_SESSION['selectedOption'];
 
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
@@ -23,7 +21,7 @@ if(isset($_POST['data'])) {
     $data = json_decode($json_data, true);
 
     // Assign the value to a variable
-    $selectedOption = $data['selectedOption'];
+    $selectedOption = $data;
 
     // Process the data here
     // ...
