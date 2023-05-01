@@ -1,7 +1,6 @@
 <?php
 session_start(); 
 
-
 $servername = "encode99.com.lk";
 $username = "encodeco_lms";
 $password = "%Lms%1234@Susipwin";
@@ -41,9 +40,6 @@ if(isset($_POST['data'])) {
     WHERE t2.studentId = (SELECT id FROM students WHERE userId = '$user_id')    
     ";
 
-
-    //  $sql2="SELECT coursename FROM courses";
-
     $result2 = $conn->query($sql2);
 
     $data2 = array();
@@ -53,11 +49,8 @@ if(isset($_POST['data'])) {
             }
         }
 
-
-      //   $data1 = array(
-      //     'data' => $data,
-      //     'data2' => $data2
-      //  );
+    // Write session data to storage and close session file
+    session_write_close();
 
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
