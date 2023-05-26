@@ -46,34 +46,32 @@ if(isset($_POST['data'])) {
     // Fetch the data from the database
     // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
 
-
     $result = $conn->query($sql);
 
     // Check if any rows were returned
     if ($result->num_rows > 0) {
-        // Fetch the row as an associative array
-        $row = $result->fetch_assoc();
-
-        // Create an array containing the relevant data
-        $data3 = array(
-            'id' => $row['id'],
-            'coursename' => $row['cid'],
-            'description' => $row['suid'],
-            // Add any other fields you want to include here
-        );
-
+        // Create an array to store the data
+        $data = array();
+    
+        // Loop through each row
+        while ($row = $result->fetch_assoc()) {
+            // Add the row data to the array
+            $data[] = array(
+                'id' => $row['id'],
+                'coursename' => $row['coursename'],
+                'description' => $row['description'],
+                // Add any other fields you want to include here
+            );
+        }
+    
         // Send the JSON response back to the Flutter app
         header('Content-Type: application/json');
-        echo json_encode($data3);
+        echo json_encode($data);
     } else {
         // No rows were returned
         $response = array('error' => 'No data found');
         echo json_encode($response);
     }
-} else {
-    // No data received
-    $response = array('error' => 'No data received');
-    echo json_encode($response);
 }
 
 // Close the database connection
