@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 }
 
 // Retrieve the data sent from the mobile app
-if(isset($_POST['data'])) {
+if(isset($_POST['data'])&&isset($_POST['name'])) {
     $selectedOption = $_POST['data'];
     $uname = $_POST['name'];
 
