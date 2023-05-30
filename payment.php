@@ -9,6 +9,7 @@ $database = "encodeco_lms";
 $user = new User();
 $uid = $user->getUserId();
 
+
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -18,38 +19,90 @@ if ($conn->connect_error) {
 }
 
 // Retrieve the data sent from the mobile app
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if(isset($_POST['name'])) {
+    // $selectedOption = $_POST['data'];
     $requestData = json_decode(file_get_contents('php://input'), true);
+    $uname = $requestData['name'];
 
-    if (isset($requestData['name'])) {
-        $uname = $requestData['name'];
+    $sql1="SELECT id from students WHERE sfullname='$uname'";
+    $sql2="SELECT id from courses WHERE courseid='$selectedOption'";
+    $sql3="SELECT cid,suid,month FROM payments WHERE suid='$'";
 
-        $sql1 = "SELECT id FROM students WHERE sfullname = '$uname'";
 
-        // Fetch the data from the database
-        $result1 = $conn->query($sql1);
 
-        if ($result1->num_rows > 0) {
-            $data = array();
+    // Process the data here
+    // ...
+    //stable version
 
-            while ($row1 = $result1->fetch_assoc()) {
-                $data[] = array(
-                    'id' => $row1['id'],
-                );
-            }
+    // $sql2 = "SELECT id FROM students WHERE userId = '$user_id' ";
+    // $sql3 = "SELECT id FROM courses WHERE coursename = '$selectedOption'";
+    // $sql4 = "SELECT * FROM payments WHERE cid = '$sql3' AND suid='$sql2' AND month='5'";
 
-            header('Content-Type: application/json');
-            echo json_encode($data);
-        } else {
-            $response = array('error' => 'No data found');
-            http_response_code(404);
-            echo json_encode($response);
+
+    // $sql = "SELECT p.* 
+    // FROM payments p 
+    // INNER JOIN students s ON p.suid = s.id 
+    // INNER JOIN courses c ON p.cid = c.id 
+    // WHERE s.userId = '$uid' 
+    // AND c.coursename = '$selectedOption'
+    // AND p.month = '5';
+    // ";
+
+
+
+// $sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
+
+
+
+
+    // Fetch the data from the database
+    // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
+
+    // $result = $conn->query($sql);
+
+    // // Check if any rows were returned
+    // if ($result->num_rows > 0) {
+    //     // Create an array to store the data
+    //     $data = array();
+    
+    //     // Loop through each row
+    //     while ($row = $result->fetch_assoc()) {
+    //         // Add the row data to the array
+    //         $data[] = array(
+    //             'id' => $row['id'],
+    //             'coursename' => $row['coursename'],
+    //             'description' => $row['description'],
+    //             // Add any other fields you want to include here
+    //         );
+    //     }
+    
+    //     // Send the JSON response back to the Flutter app
+    //     header('Content-Type: application/json');
+    //     echo json_encode($data);
+    // } else {
+    //     // No rows were returned
+    //     $response = array('error' => 'No data found');
+    //     echo json_encode($response);
+    // }
+
+
+    // Testing
+    $result1=$conn->query($sql1);
+
+    if($result1->num_rows > 0){
+        while ($row1 = $result1->fetch_assoc()) {
+            // Add the row data to the array
+            $data[] = array(
+                'id' => $row1['id'],
+            );
         }
-    } else {
-        $response = array('error' => 'Missing required parameter');
-        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }else{
+        $response = array('error' => 'No data found');
         echo json_encode($response);
     }
+    
 }
 
 // Close the database connection
