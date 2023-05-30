@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 
 // Retrieve the data sent from the mobile app
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $requestData = json_decode(file_get_contents('php://input'), true);
+    // $requestData = json_decode(file_get_contents('php://input'), true);
 
     if (isset($requestData['name'])) {
         $uname = $requestData['name'];
