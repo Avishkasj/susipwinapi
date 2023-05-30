@@ -66,7 +66,7 @@ $sql ="SELECT p.cid, p.suid, p.month
 
     // Check if any rows were returned
     if ($result->num_rows > 0) {
-        $check = "Pay";
+        $check = "Paid";
         // Create an array to store the data
         $data = array();
     
