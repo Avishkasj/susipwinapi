@@ -21,6 +21,7 @@ if ($conn->connect_error) {
 // Retrieve the data sent from the mobile app
 if(isset($_POST['data'])) {
     $selectedOption = $_POST['data'];
+    $uname = $_POST['name'];
 
     // Process the data here
     // ...
@@ -39,6 +40,8 @@ if(isset($_POST['data'])) {
     // AND c.coursename = '$selectedOption'
     // AND p.month = '5';
     // ";
+
+
 
 $sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
 
