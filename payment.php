@@ -25,14 +25,18 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
     // Process the data here
     // ...
 
-    $sql = "SELECT p.* 
-    FROM payments p 
-    INNER JOIN students s ON p.suid = s.id 
-    INNER JOIN courses c ON p.cid = c.id 
-    WHERE s.userId = '$uid' 
-    AND c.coursename = '$selectedOption'
-    AND p.month = '5';
+    // $sql = "SELECT p.* 
+    // FROM payments p 
+    // INNER JOIN students s ON p.suid = s.id 
+    // INNER JOIN courses c ON p.cid = c.id 
+    // WHERE s.userId = '$uid' 
+    // AND c.coursename = '$selectedOption'
+    // AND p.month = '5';
+    // ";
+
+     $sql = "SELECT * FROM users WHERE username= $name
     ";
+
 
     // Fetch the data from the database
     $result = $conn->query($sql);
