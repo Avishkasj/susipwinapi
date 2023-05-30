@@ -92,7 +92,7 @@ if(isset($_POST['name'])) {
         while ($row1 = $result1->fetch_assoc()) {
             // Add the row data to the array
             $data[] = array(
-                'id' => $row['id'],
+                'id' => $row1['id'],
             );
         }
         header('Content-Type: application/json');
