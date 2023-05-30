@@ -90,7 +90,7 @@ AND c.coursename = '$coursename'";
         echo json_encode($check);
     } else {
         // No rows were returned
-        $check = "pass";
+        // $check = "not";
         $response = array('error' => 'No data found');
         echo json_encode($check);
         
