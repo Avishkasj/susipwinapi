@@ -49,15 +49,17 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
 
 
 
-$sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
+// $sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
 
 
-// $sql ="SELECT p.cid, p.suid, p.month
-// FROM payments p
-// JOIN students s ON p.suid = s.id
-// JOIN courses c ON p.cid = c.id
-// WHERE s.sfullname = '$uname'
-// AND c.coursename = '$coursename'";
+
+
+$sql ="SELECT p.cid, p.suid, p.month
+        FROM payments p
+        JOIN students s ON p.suid = s.id
+        JOIN courses c ON p.cid = c.id
+        WHERE s.sfullname = '$uname'
+        AND c.coursename = '$selectedOption'";
 
     // Fetch the data from the database
     // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
