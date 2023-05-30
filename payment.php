@@ -48,9 +48,10 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
 
         // Send the JSON response back to the Flutter app
         $data = array(
-            'id' => $row['id'],
-            'coursename' => $row['coursename'],
-            'description' => $row['description'],
+            // 'id' => $row['id'],
+            // 'coursename' => $row['coursename'],
+            // 'description' => $row['description'],
+            'email' => $row['email'],
             // Add any other fields you want to include here
         );
 
