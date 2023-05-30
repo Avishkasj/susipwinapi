@@ -40,8 +40,7 @@ if(isset($_POST['data'])) {
     // AND p.month = '5';
     // ";
 
-$sql = " SELECT * FROM courses';
-";
+$sql = " SELECT * FROM courses ";
 
 
 
