@@ -23,8 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($requestData['name'])) {
         $uname = $requestData['name'];
+        $coursename=$requestData['coursename'];
 
-        $sql1 = "SELECT id FROM students WHERE sfullname = '$uname'";
+        $sql1 ="SELECT p.cid, p.suid, p.month
+        FROM payments p
+        JOIN students s ON p.suid = s.id
+        JOIN courses c ON p.cid = c.id
+        WHERE s.sfullname = '$uname'
+        AND c.coursename = '$coursename'";
 
         // Fetch the data from the database
         $result1 = $conn->query($sql1);
@@ -33,8 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array();
 
             while ($row1 = $result1->fetch_assoc()) {
+                
                 $data[] = array(
-                    'id' => $row1['id'],
+                    'cid' => $row1['cid'],
+                    'suid'=>$row1['suid'],
+                    'month'=>$row1['month']
                 );
             }
 
