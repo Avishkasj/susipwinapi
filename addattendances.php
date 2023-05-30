@@ -25,129 +25,46 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
 
 
 
-$sql1 = "SELECT id FROM users WHERE username='$uname'";
-$sql2 = "SELECT id FROM courses WHERE courseid='$selectedOption'";
+    $sql = "SELECT p.cid, p.suid, p.month
+    FROM payments p
+    JOIN students s ON p.suid = s.id
+    JOIN courses c ON p.cid = c.id
+    WHERE s.sfullname = ?
+    AND c.coursename = ?";
 
-// Execute the SQL queries to fetch the results
-$result1 = mysqli_query($connection, $sql1);
-$result2 = mysqli_query($connection, $sql2);
+// Prepare the SQL statement
+$stmt = $conn->prepare($sql);
 
-// Check if the queries executed successfully
-if ($result1 && $result2) {
-  // Fetch the results from the first query
-  $row1 = mysqli_fetch_assoc($result1);
-  $userId = $row1['id'];
+// Bind parameters and execute the query
+$stmt->bind_param("ss", $uname, $selectedOption);
+$stmt->execute();
 
-  // Fetch the results from the second query
-  $row2 = mysqli_fetch_assoc($result2);
-  $courseId = $row2['id'];
+// Get the result
+$result = $stmt->get_result();
 
-  // Get the current day and time
-  $currentDay = date("l");
-  $current_time = date("H:i:s");
+// Check if the query executed successfully
+if ($result) {
+// Fetch the result row
+$row = $result->fetch_assoc();
+$cid = $row['cid'];
+$suid = $row['suid'];
+$month = $row['month'];
 
-  // Create the SQL insert statement
-  $sql3 = "INSERT INTO attendances (auserid, acourseid, aday, atime, astatus)
-           VALUES ('$userId', '$courseId', '$currentDay', '$current_time', '1')";
+// Process the result as needed
+// ...
 
-  // Execute the insert query
-  if (mysqli_query($connection, $sql3)) {
-    echo "Attendance recorded successfully.";
-    $check="successfully";
-    header('Content-Type: application/json');
-        echo json_encode($check);
-  } else {
-    echo "Error: " . mysqli_error($connection);
-    $check = "Not Pay";
-        $response = array('error' => 'No data found');
-        echo json_encode($check);
-    
-  }
+echo "Query executed successfully.";
+$response = array('success' => 'Query executed successfully.');
+header('Content-Type: application/json');
+echo json_encode($response);
 } else {
-  echo "Error: " . mysqli_error($connection);
-  $check = "Not Pay";
-        $response = array('error' => 'No data found');
-        echo json_encode($check);
+echo "Error: " . $conn->error;
+$response = array('error' => 'No data found');
+header('Content-Type: application/json');
+echo json_encode($response);
 }
 
-
-    // $currentDay = date("l");
-    // $current_time = date("H:i:s");
-
-    // $sql1="SELECT id from users WHERE username='$uname'";
-    // $sql2="SELECT id from courses WHERE courseid='$selectedOption'";
-    // $sql3="INSERT INTO attendances (auserid,acourseid,aday,atime,astatus)values ($sql1,$sql2 , $currentDay,$current_time,'1'))"
-
-
-
-    // Process the data here
-    // ...
-    //stable version
-
-    // $sql2 = "SELECT id FROM students WHERE userId = '$user_id' ";
-    // $sql3 = "SELECT id FROM courses WHERE coursename = '$selectedOption'";
-    // $sql4 = "SELECT * FROM payments WHERE cid = '$sql3' AND suid='$sql2' AND month='5'";
-
-
-    // $sql = "SELECT p.* 
-    // FROM payments p 
-    // INNER JOIN students s ON p.suid = s.id 
-    // INNER JOIN courses c ON p.cid = c.id 
-    // WHERE s.userId = '$uid' 
-    // AND c.coursename = '$selectedOption'
-    // AND p.month = '5';
-    // ";
-
-
-
-// $sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
-
-
-// $sql ="SELECT p.cid, p.suid, p.month
-//         FROM payments p
-//         JOIN students s ON p.suid = s.id
-//         JOIN courses c ON p.cid = c.id
-//         WHERE s.sfullname = '$uname'
-//         AND c.coursename = '$selectedOption'";
-
-
-    // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
-
-    // $result = $conn->query($sql);
-
-    // // Check if any rows were returned
-    // if ($result->num_rows > 0) {
-    //     $check = "Paid";
-    //     // Create an array to store the data
-    //     $data = array();
-    
-    //     // Loop through each row
-    //     while ($row = $result->fetch_assoc()) {
-    //         // Add the row data to the array
-    //         $data[] = array(
-    //             // 'id' => $row['id'],
-    //             // 'coursename' => $row['coursename'],
-    //             // 'description' => $row['description'],
-    //             // Add any other fields you want to include here
-
-    //             // 'cid' => $row1['cid'],
-    //             // 'suid'=>$row1['suid'],
-    //             // 'month'=>$row1['month'],
-    //         );
-    //     }
-    
-    //     // Send the JSON response back to the Flutter app
-    //     header('Content-Type: application/json');
-    //     echo json_encode($check);
-    // } else {
-    //     // No rows were returned
-    //     $check = "Not Pay";
-    //     $response = array('error' => 'No data found');
-    //     echo json_encode($check);
-        
-    // }
+// Close the prepared statement
+$stmt->close();
 }
-
-// Close the database connection
-$conn->close();
 ?>
