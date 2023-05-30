@@ -19,14 +19,13 @@ if ($conn->connect_error) {
 }
 
 // Retrieve the data sent from the mobile app
-if(isset($_POST['name'])) {
-    // $selectedOption = $_POST['data'];
-    $requestData = json_decode(file_get_contents('php://input'), true);
-    $uname = $requestData['name'];
+if(isset($_POST['data'])&&isset($_POST['name'])) {
+    $selectedOption = $_POST['data'];
+    $uname = $_POST['name'];
 
-    $sql1="SELECT id from students WHERE sfullname='$uname'";
-    $sql2="SELECT id from courses WHERE courseid='$selectedOption'";
-    $sql3="SELECT cid,suid,month FROM payments WHERE suid='$'";
+    // $sql1="SELECT id from students WHERE sfullname='$uname'";
+    // $sql2="SELECT id from courses WHERE courseid='$selectedOption'";
+    // $sql3="SELECT cid,suid,month FROM payments WHERE suid='$'"
 
 
 
@@ -50,7 +49,7 @@ if(isset($_POST['name'])) {
 
 
 
-// $sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
+$sql = " SELECT * FROM courses WHERE coursename = '$selectedOption' ";
 
 
 
@@ -58,51 +57,32 @@ if(isset($_POST['name'])) {
     // Fetch the data from the database
     // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
 
-    // $result = $conn->query($sql);
+    $result = $conn->query($sql);
 
-    // // Check if any rows were returned
-    // if ($result->num_rows > 0) {
-    //     // Create an array to store the data
-    //     $data = array();
+    // Check if any rows were returned
+    if ($result->num_rows > 0) {
+        // Create an array to store the data
+        $data = array();
     
-    //     // Loop through each row
-    //     while ($row = $result->fetch_assoc()) {
-    //         // Add the row data to the array
-    //         $data[] = array(
-    //             'id' => $row['id'],
-    //             'coursename' => $row['coursename'],
-    //             'description' => $row['description'],
-    //             // Add any other fields you want to include here
-    //         );
-    //     }
-    
-    //     // Send the JSON response back to the Flutter app
-    //     header('Content-Type: application/json');
-    //     echo json_encode($data);
-    // } else {
-    //     // No rows were returned
-    //     $response = array('error' => 'No data found');
-    //     echo json_encode($response);
-    // }
-
-
-    // Testing
-    $result1=$conn->query($sql1);
-
-    if($result1->num_rows > 0){
-        while ($row1 = $result1->fetch_assoc()) {
+        // Loop through each row
+        while ($row = $result->fetch_assoc()) {
             // Add the row data to the array
             $data[] = array(
-                'id' => $row1['id'],
+                'id' => $row['id'],
+                'coursename' => $row['coursename'],
+                'description' => $row['description'],
+                // Add any other fields you want to include here
             );
         }
+    
+        // Send the JSON response back to the Flutter app
         header('Content-Type: application/json');
         echo json_encode($data);
-    }else{
+    } else {
+        // No rows were returned
         $response = array('error' => 'No data found');
         echo json_encode($response);
     }
-    
 }
 
 // Close the database connection
