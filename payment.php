@@ -66,7 +66,7 @@ $sql ="SELECT p.cid, p.suid, p.month
 
     // Check if any rows were returned
     if ($result->num_rows > 0) {
-        $check = "pass";
+        $check = "Pay";
         // Create an array to store the data
         $data = array();
     
@@ -90,7 +90,7 @@ $sql ="SELECT p.cid, p.suid, p.month
         echo json_encode($check);
     } else {
         // No rows were returned
-        $check = "not";
+        $check = "Not Pay";
         $response = array('error' => 'No data found');
         echo json_encode($check);
         
