@@ -66,6 +66,7 @@ AND c.coursename = '$coursename'";
 
     // Check if any rows were returned
     if ($result->num_rows > 0) {
+        $check = "pass";
         // Create an array to store the data
         $data = array();
     
@@ -86,11 +87,13 @@ AND c.coursename = '$coursename'";
     
         // Send the JSON response back to the Flutter app
         header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode($check);
     } else {
         // No rows were returned
+        $check = "not";
         $response = array('error' => 'No data found');
-        echo json_encode($response);
+        echo json_encode($check);
+        
     }
 }
 
