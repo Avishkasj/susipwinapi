@@ -14,61 +14,50 @@ if ($conn->connect_error) {
 }
 
 // Retrieve the data sent from the mobile app
-if(isset($_POST['data'])) {
-    $json_data = $_POST['data'];
+if(isset($_POST['data']) && isset($_POST['uid'])) {
+    $selectedOption = $_POST['data'];
+    $uid = $_POST['uid'];
 
-    // Decode the JSON data into a PHP associative array
-    $data = json_decode($json_data, true);
-    
-    // Assign each value to a separate variable
-    $user_id = $data['userid'];
-    // $course_id = $data['courses'];
-    // $id = $data['id'];
-    
     // Process the data here
     // ...
-    
-    $sql = "SELECT * FROM students WHERE userId='$user_id'";
-    $result = $conn->query($sql);
 
-    // Convert the data to a JSON array
+    // Prepare and execute the SQL query to retrieve user data
+    $stmt = $conn->prepare("SELECT * FROM students WHERE userId = ?");
+    $stmt->bind_param("s", $uid);
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+
+    // Convert the result into an associative array
     $data = array();
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
     }
 
+    // Prepare and execute the SQL query to retrieve registered course names
+    $stmt2 = $conn->prepare("SELECT coursename FROM courses WHERE courseid = ?");
+    $stmt2->bind_param("s", $selectedOption);
+    $stmt2->execute();
 
-    //registerd course 
-    // $sql2 = "SELECT t1.coursename
-    // FROM courses t1
-    // INNER JOIN coursestudents t2 ON t1.id = t2.courseId
-    // WHERE t2.studentId = '$user_id';
-    // ";
+    // Get the result
+    $result2 = $stmt2->get_result();
 
-    $sql2="SELECT coursename FROM courses WHERE courseid='ET2025'";
-
-    $result2 = $conn->query($sql2);
-
+    // Convert the result into an associative array
     $data2 = array();
-        if ($result2->num_rows > 0) {
-            while($row = $result2->fetch_assoc()) {
-                $data2[] = $row;
-            }
-        }
+    while ($row = $result2->fetch_assoc()) {
+        $data2[] = $row;
+    }
 
-
-      //   $data1 = array(
-      //     'data' => $data,
-      //     'data2' => $data2
-      //  );
+    // Combine the data into a single array
+    $response = array(
+        'data' => $data,
+        'data2' => $data2
+    );
 
     // Send the JSON response back to the Flutter app
     header('Content-Type: application/json');
-    echo json_encode($data);
-    // echo json_encode($data2);
-
+    echo json_encode($response);
 } else {
     // No data received
     $response = array('error' => 'No data received');
