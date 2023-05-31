@@ -90,7 +90,7 @@ $sql ="SELECT p.cid, p.suid, p.month
         echo json_encode($check);
     } else {
         // No rows were returned
-        $check = "Paid";
+        $check = "Not Pay";
         $response = array('error' => 'No data found');
         echo json_encode($check);
         
@@ -100,3 +100,4 @@ $sql ="SELECT p.cid, p.suid, p.month
 // Close the database connection
 $conn->close();
 ?>
+
