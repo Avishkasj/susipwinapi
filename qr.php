@@ -1,9 +1,9 @@
 <?php
 
-$servername = "encode99.com.lk";
-$username = "encodeco_lms";
-$password = "%Lms%1234@Susipwin";
-$database = "encodeco_lms";
+$servername = "encode99.org.lk";
+$username = "encodeor";
+$password = "CoY738RWk-+7pl";
+$database = "encodeor_tuition";
 
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
