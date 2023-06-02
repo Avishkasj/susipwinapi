@@ -21,20 +21,17 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
     $selectedOption = $_POST['data'];
     $uname = $_POST['name'];
 
-    $sql2 ="SELECT p.cid, p.suid, p.month
-        FROM payments p
-        JOIN users u ON p.suid = u.id
-        JOIN courses c ON p.cid = c.id
-        WHERE u.id = '$uname'
-        AND c.coursename = '$selectedOption'";
+    $sql2 ="SELECT id FROM courses WHERE coursename = '$selectedOption'";
 
 
     // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
 
     $result = $conn->query($sql2);
 
+   
+
 $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-VALUES ($uname, 'course456', '2023-06-02', '09:00:00', NOW(), NOW());
+VALUES ($uname, $result, '2023-06-02', '09:00:00', NOW(), NOW());
 ";
 $result = mysqli_query($conn, $sql);
 
