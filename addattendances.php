@@ -18,42 +18,39 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve the data sent from the mobile app
-// if(isset($_POST['data'])&&isset($_POST['name'])) {
-//     $selectedOption = $_POST['data'];
-//     $uid = $_POST['name'];
+if(isset($_POST['data'])&&isset($_POST['name'])) {
+    $selectedOption = $_POST['data'];
+    $uname = $_POST['name'];
 
 
+$sql = "SELECT * FROM courses WHERE coursename = $selectedOption";
+$result = mysqli_query($conn, $sql);
 
-// $sql = "SELECT * FROM courses WHERE coursename = $selectedOption";
-// $result = mysqli_query($connection, $sql);
+if ($result) {
+    $course = mysqli_fetch_assoc($result);
+    $cid = $course['id'];
 
 
-// if ($result) {
-//     $user = mysqli_fetch_assoc($result);
-  
-//     // Extracting the relevant data from the retrieved user
-//     $cId = $user['id'];
-    
-  
-//     // Inserting the data into the attendances table
-//     $insertSql = "INSERT INTO attendances (id, auserid, acourseid, aday, atime, createdAt, updatedAt) 
-//                   VALUES (1, $uid, $cId, CURDATE(), CURTIME(), NOW(), NOW())";
-  
-//     $insertResult = mysqli_query($connection, $insertSql);
-    
-//         // Send the JSON response back to the Flutter app
-//         header('Content-Type: application/json');
-//         echo json_encode($check);
-//     } else {
-//         // No rows were returned
-//         $check = "Not Pay";
-//         $response = array('error' => 'No data found');
-//         echo json_encode($check);
-        
-//     }
-// }
+    $insertSql = "INSERT INTO attendances (id, auserid, acourseid, aday, atime, createdAt, updatedAt) 
+    VALUES (1, $uid, $cid, CURDATE(), CURTIME(), NOW(), NOW())";
+    $insertResult = mysqli_query($conn, $insertSql);
 
+    if ($insertResult) {
+        echo "Data inserted successfully into the attendances table.";
+        $check = "Mark";
+        header('Content-Type: application/json');
+        echo json_encode($check);
+      }
+      else{
+        $check = "Not Mark";
+        $response = array('error' => 'No data found');
+        echo json_encode($check);
+      }
+
+}
+
+
+}
 // Close the database connection
 $conn->close();
 ?>
