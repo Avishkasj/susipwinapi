@@ -40,8 +40,8 @@ if(isset($_POST['data'])) {
     $sql2 = "SELECT t1.coursename
     FROM courses t1
     INNER JOIN coursestudents t2 ON t1.id = t2.courseId
-    WHERE t2.studentId = (SELECT id FROM students WHERE userId = '$user_id')    
-    ";
+    WHERE t2.userId = '$user_id'";
+
 
     $result2 = $conn->query($sql2);
 
