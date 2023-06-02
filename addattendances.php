@@ -32,7 +32,7 @@ if ($result) {
 
 
     $insertSql = "INSERT INTO attendances(auserid, acourseid) 
-    VALUES ($uid, $cid)";
+    VALUES (1, 2)";
     $insertResult = mysqli_query($conn, $insertSql);
 
     if ($insertResult) {
