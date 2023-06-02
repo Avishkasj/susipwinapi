@@ -33,7 +33,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $courseId = $row['id'];
 
         $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-                VALUES (?, ?, $currentDate , '09:00:00', NOW(), NOW())";
+                VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $uname, $courseId);
