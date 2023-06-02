@@ -24,7 +24,7 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
 
 
 $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-VALUES ($uname, $selectedOption, '2023-06-02', '09:00:00', NOW(), NOW());
+VALUES ($uname, 'course456', '2023-06-02', '09:00:00', NOW(), NOW());
 ";
 $result = mysqli_query($conn, $sql);
 
