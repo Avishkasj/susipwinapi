@@ -32,6 +32,13 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $row = $result->fetch_assoc();
         $courseId = $row['id'];
 
+        $sql2 = "SELECT * FROM attendances WHERE auserid = ? AND acourseid = ? AND aday = CURDATE()";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bind_param("ii", $uname, $courseId);
+        $stmt2->execute();
+        $result = $stmt2->get_result(); // Fetch the result set
+
+
         $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
                 VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
 
@@ -39,12 +46,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $stmt->bind_param("ii", $uname, $courseId);
         $stmt->execute();
 
-        $sql2 = "SELECT * FROM attendances WHERE auserid = ? AND acourseid = ? AND aday = CURDATE()";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param("ii", $uname, $courseId);
-        $stmt2->execute();
-        $result = $stmt2->get_result(); // Fetch the result set
-
+       
         if ($result->num_rows > 0) {
         // The result set is not empty
         $check = "use";
