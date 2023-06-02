@@ -9,7 +9,6 @@ $database = "encodeor_tuition";
 // $user = new User();
 // $uid = $user->getUserId();
 
-
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -24,7 +23,7 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
 
 
 $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-VALUES ($uname, 'course456', '2023-06-02', '09:00:00', NOW(), NOW());
+VALUES ($uname, $selectedOption, '2023-06-02', '09:00:00', NOW(), NOW());
 ";
 $result = mysqli_query($conn, $sql);
 
