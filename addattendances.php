@@ -31,8 +31,8 @@ if ($result) {
     $cid = $course['id'];
 
 
-    $insertSql = "INSERT INTO attendances(id, auserid, acourseid, aday, atime,) 
-    VALUES (1, $uid, $cid, CURDATE(), CURTIME())";
+    $insertSql = "INSERT INTO attendances(auserid, acourseid) 
+    VALUES ($uid, $cid)";
     $insertResult = mysqli_query($conn, $insertSql);
 
     if ($insertResult) {
