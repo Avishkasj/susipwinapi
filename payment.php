@@ -54,9 +54,9 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
 
 $sql ="SELECT p.cid, p.suid, p.month
         FROM payments p
-        JOIN students s ON p.suid = s.id
+        JOIN users u ON p.suid = u.id
         JOIN courses c ON p.cid = c.id
-        WHERE s.sfullname = '$uname'
+        WHERE u.id = '$uname'
         AND c.coursename = '$selectedOption'";
 
 
