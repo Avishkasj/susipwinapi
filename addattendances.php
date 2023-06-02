@@ -23,19 +23,13 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
     $uname = $_POST['name'];
 
 
-$sql = "SELECT * FROM courses WHERE coursename = $selectedOption";
+$sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
+VALUES ('user123', 'course456', '2023-06-02', '09:00:00', NOW(), NOW());
+";
 $result = mysqli_query($conn, $sql);
 
-if ($result) {
-    $course = mysqli_fetch_assoc($result);
-    $cid = $course['id'];
 
-
-    $insertSql = "INSERT INTO attendances (id, auserid, acourseid, aday, atime, createdAt, updatedAt) 
-    VALUES (1, 1, 1, 2022/2/2, 2022/2/2, 2022/2/2, 2022/2/2)";
-    $insertResult = mysqli_query($conn, $insertSql);
-
-    if ($insertResult) {
+    if ($result) {
         echo "Data inserted successfully into the attendances table.";
         $check = "Mark";
         header('Content-Type: application/json');
@@ -47,7 +41,6 @@ if ($result) {
         echo json_encode($check);
       }
 
-}
 
 
 }
