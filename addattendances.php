@@ -21,12 +21,12 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
     $selectedOption = $_POST['data'];
     $uname = $_POST['name'];
 
-    $sql2 ="SELECT id FROM courses WHERE coursename = $selectedOption";
+$sql2 = "SELECT id FROM courses WHERE coursename = ?";
+$stmt = $conn->prepare($sql2);
+$stmt->bind_param("s", $selectedOption);
+$stmt->execute();
+$result = $stmt->get_result();
 
-
-    // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
-
-    $result = $conn->query($sql2);
 
    
 
