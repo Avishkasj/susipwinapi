@@ -39,12 +39,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $result = $stmt2->get_result(); // Fetch the result set
 
 
-        $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-                VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ii", $uname, $courseId);
-        $stmt->execute();
+        
 
        
         if ($result->num_rows > 0) {
@@ -52,6 +47,12 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $check = "use";
         echo json_encode($check);
         } else {
+            $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
+                VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $uname, $courseId);
+        $stmt->execute();
         // The result set is empty
         if ($stmt->affected_rows > 0) {
             $check = "Mark";
