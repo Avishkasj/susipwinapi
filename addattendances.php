@@ -25,20 +25,20 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
 
 
 
+$sql = "SELECT * FROM courses WHERE coursename = $selectedOption";
+$result = mysqli_query($connection, $sql);
 
 
-$sql2 = "SELECT id FROM courses WHERE coursename= $selectedOption";
-$result2 = mysqli_query($connection, $sql2);
-
-if ($result2) {
-    
-    $coerse =  mysqli_fetch_assoc($result2);
+if ($result) {
+    $user = mysqli_fetch_assoc($result);
   
-    $cid = $coerse['id'];
+    // Extracting the relevant data from the retrieved user
+    $cId = $user['id'];
+    
   
     // Inserting the data into the attendances table
-    $insertSql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt) 
-                  VALUES ($uid, $cid, CURDATE(), CURTIME(), NOW(), NOW())";
+    $insertSql = "INSERT INTO attendances (id, auserid, acourseid, aday, atime, createdAt, updatedAt) 
+                  VALUES (1, $uid, $cId, CURDATE(), CURTIME(), NOW(), NOW())";
   
     $insertResult = mysqli_query($connection, $insertSql);
     
