@@ -39,18 +39,31 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $stmt->bind_param("ii", $uname, $courseId);
         $stmt->execute();
 
-        if ($stmt->affected_rows > 0) {
-            $check = "Mark";
-            header('Content-Type: application/json');
-            echo json_encode($check);
+        $sql2 = "SELECT * FROM attendances WHERE auserid = ? AND acourseid = ? AND aday = CURDATE()";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bind_param("ii", $uname, $courseId);
+        $stmt2->execute();
+
+        if ($stmt2->affected_rows > 0) {
+            if ($stmt->affected_rows > 0) {
+                $check = "Mark";
+                header('Content-Type: application/json');
+                echo json_encode($check);
+            } else {
+                $check = "Not Mark";
+                echo json_encode($check);
+            }
         } else {
             $check = "Not Mark";
             echo json_encode($check);
         }
-    } else {
-        $check = "Not Mark";
-        echo json_encode($check);
-    }
+
+    }else{
+        $check = "use";
+            echo json_encode($check);
+    } 
+
+       
 }
 
 // Close the prepared statement and database connection
