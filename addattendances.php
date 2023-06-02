@@ -31,7 +31,7 @@ $result = $stmt->get_result();
    
 
 $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-VALUES ($uname, '$result', '2023-06-02', '09:00:00', NOW(), NOW());
+VALUES ($uname,$result, '2023-06-02', '09:00:00', NOW(), NOW());
 ";
 $result = mysqli_query($conn, $sql);
 
