@@ -21,7 +21,7 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
     $selectedOption = $_POST['data'];
     $uname = $_POST['name'];
 
-    $sql2 ="SELECT id FROM courses WHERE coursename = '$selectedOption'";
+    $sql2 ="SELECT id FROM courses WHERE coursename = $selectedOption";
 
 
     // $sql = "SELECT * FROM courses WHERE coursename = '$selectedOption'";
@@ -31,7 +31,7 @@ if(isset($_POST['data'])&&isset($_POST['name'])) {
    
 
 $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-VALUES ($uname, '$result', '2023-06-02', '09:00:00', NOW(), NOW());
+VALUES ($uname, $result, '2023-06-02', '09:00:00', NOW(), NOW());
 ";
 $result = mysqli_query($conn, $sql);
 
