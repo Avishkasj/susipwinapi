@@ -45,6 +45,9 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $stmt2->execute();
 
         if ($stmt2->affected_rows > 0) {
+            $check = "use";
+            echo json_encode($check);
+        } else {
             if ($stmt->affected_rows > 0) {
                 $check = "Mark";
                 header('Content-Type: application/json');
@@ -53,14 +56,9 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
                 $check = "Not Mark";
                 echo json_encode($check);
             }
-        } else {
-            $check = "Not Mark";
-            echo json_encode($check);
         }
-
     }else{
-        $check = "use";
-            echo json_encode($check);
+       
     } 
 
        
