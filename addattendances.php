@@ -39,8 +39,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $result = $stmt2->get_result(); // Fetch the result set
 
 
-        
-
+    
        
         if ($result->num_rows > 0) {
         // The result set is not empty
