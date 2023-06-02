@@ -23,11 +23,11 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
     $uname = $_POST['name'];
 
     $sql = "SELECT p.cid, p.suid, p.month
-            FROM payments p
-            JOIN students s ON p.suid = s.id
-            JOIN courses c ON p.cid = c.id
-            WHERE s.sfullname = ?
-            AND c.coursename = ?";
+    FROM payments p
+    JOIN users u ON p.suid = u.id
+    JOIN courses c ON p.cid = c.id
+    WHERE u.id = '$uname'
+    AND c.coursename = '$selectedOption'";
 
     // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
