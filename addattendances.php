@@ -43,25 +43,26 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bind_param("ii", $uname, $courseId);
         $stmt2->execute();
+        $result = $stmt2->get_result(); // Fetch the result set
 
-        if ($stmt2->affected_rows > 0) {
-            $check = "use";
+        if ($result->num_rows > 0) {
+        // The result set is not empty
+        $check = "use";
+        echo json_encode($check);
+        } else {
+        // The result set is empty
+        if ($stmt->affected_rows > 0) {
+            $check = "Mark";
+            header('Content-Type: application/json');
             echo json_encode($check);
         } else {
-            if ($stmt->affected_rows > 0) {
-                $check = "Mark";
-                header('Content-Type: application/json');
-                echo json_encode($check);
-            } else {
-                $check = "Not Mark";
-                echo json_encode($check);
-            }
+            $check = "Not Mark";
+            echo json_encode($check);
         }
-    }else{
-       
-    } 
+        }
 
-       
+
+}
 }
 
 // Close the prepared statement and database connection
