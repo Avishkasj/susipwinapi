@@ -20,6 +20,7 @@ if ($conn->connect_error) {
 if (isset($_POST['data']) && isset($_POST['name'])) {
     $selectedOption = $_POST['data'];
     $uname = $_POST['name'];
+    $currentDate = date('Y-m-d');
 
     $sql2 = "SELECT id FROM courses WHERE coursename = ?";
     $stmt = $conn->prepare($sql2);
@@ -32,7 +33,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $courseId = $row['id'];
 
         $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-                VALUES (?, ?, '2023-06-02', '09:00:00', NOW(), NOW())";
+                VALUES (?, ?, $currentDate , '09:00:00', NOW(), NOW())";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $uname, $courseId);
