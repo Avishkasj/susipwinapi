@@ -39,7 +39,6 @@ if(isset($_POST['data'])) {
         }
     }
 
-
     //registerd course 
     // $sql2 = "SELECT t1.coursename
     // FROM courses t1
@@ -57,7 +56,6 @@ if(isset($_POST['data'])) {
                 $data2[] = $row;
             }
         }
-
 
       //   $data1 = array(
       //     'data' => $data,
