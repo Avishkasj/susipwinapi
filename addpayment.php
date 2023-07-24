@@ -42,6 +42,45 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
     
        
         if ($result->num_rows > 0) {
+
+            $api_url = 'http://sender.zirconhost.com/api/v2/send.php';
+            $user_id = 105082;
+            $api_key = 'xv8np326kfaw3uqjt';
+            $sender_id = 'Encode99';
+            $to = '0762697156';
+            $message = 'hello';
+
+            // Create the query string with the parameters
+            $query_string = http_build_query([
+                'user_id' => $user_id,
+                'api_key' => $api_key,
+                'sender_id' => $sender_id,
+                'to' => $to,
+                'message' => $message,
+            ]);
+
+            // Construct the full URL with the query string
+            $request_url = $api_url . '?' . $query_string;
+
+            // Send the GET request to the API
+            $response = file_get_contents($request_url);
+
+            // Check if the request was successful
+            if ($response !== false) {
+                // API returned a response, you can check and process it here
+                echo "SMS sent successfully!";
+            } else {
+                // Request failed
+                echo "Failed to send SMS.";
+            }
+
+
+
+
+
+
+
+
         // The result set is not empty
         $check = "use";
         echo json_encode($check);
@@ -78,43 +117,9 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
 
 
 
-                    $api_url = 'http://sender.zirconhost.com/api/v2/send.php';
-                    $user_id = 105082;
-                    $api_key = 'xv8np326kfaw3uqjt';
-                    $sender_id = 'Encode99';
-                    $to = '0762697156';
-                    $message = 'hello';
-
-                    // Create the query string with the parameters
-                    $query_string = http_build_query([
-                        'user_id' => $user_id,
-                        'api_key' => $api_key,
-                        'sender_id' => $sender_id,
-                        'to' => $to,
-                        'message' => $message,
-                    ]);
-
-                    // Construct the full URL with the query string
-                    $request_url = $api_url . '?' . $query_string;
-
-                    // Send the GET request to the API
-                    $response = file_get_contents($request_url);
-
-                    // Check if the request was successful
-                    if ($response !== false) {
-                        // API returned a response, you can check and process it here
-                        echo "SMS sent successfully!";
-                    } else {
-                        // Request failed
-                        echo "Failed to send SMS.";
-                    }
-
-
-
-
+                   
 
                 }
-
 
 
             }
