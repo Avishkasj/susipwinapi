@@ -32,11 +32,11 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $row = $result->fetch_assoc();
         $courseId = $row['id'];
 
-        $sql2 = "SELECT * FROM attendances WHERE auserid = ? AND acourseid = ? AND aday = CURDATE()";
+        $sql2 = "SELECT * FROM payments WHERE cid = ? AND suid = ? AND month = CURDATE()";
         $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param("ii", $uname, $courseId);
+        $stmt2->bind_param("ii", $courseId, $uname);
         $stmt2->execute();
-        $result = $stmt2->get_result(); // Fetch the result set
+        $result = $stmt2->get_result();// Fetch the result set
 
 
     
@@ -46,12 +46,12 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $check = "use";
         echo json_encode($check);
         } else {
-            $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-                VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
+            $sql = "INSERT INTO payments (cid, suid, month, createdAt, updatedAt)
+         VALUES (?, ?, CURDATE(), NOW(), NOW())";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ii", $uname, $courseId);
-        $stmt->execute();
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ii", $courseId, $uname);
+            $stmt->execute();
         // The result set is empty
         if ($stmt->affected_rows > 0) {
             $check = "Mark";
