@@ -32,7 +32,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $courseId = $row['id'];
 
         // Check if the attendance record already exists for the user and course on the current date
-        $sql2 = "SELECT * FROM attendances WHERE auserid = ? AND acourseid = ? AND aday = CURDATE()";
+        $sql2 = "SELECT * FROM payments WHERE suid = ? AND cid = ? AND month = CURDATE()";
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bind_param("ii", $uname, $courseId);
         $stmt2->execute();
@@ -44,7 +44,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             echo json_encode($check);
         } else {
             // Insert a new attendance record into the 'payments' table
-            $sql3 = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt) VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
+            $sql3 = "INSERT INTO payments (suid, aid, month,  createdAt, updatedAt) VALUES (?, ?, CURDATE(), NOW(), NOW())";
             $stmt3 = $conn->prepare($sql3);
             $stmt3->bind_param("ii", $uname, $courseId);
             $stmt3->execute();
