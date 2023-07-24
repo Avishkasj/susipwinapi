@@ -1,13 +1,11 @@
 <?php
 require_once 'User.php';
 session_start();
+
 $servername = "encode99.org.lk";
 $username = "encodeor";
 $password = "CoY738RWk-+7pl";
 $database = "encodeor_tuition";
-
-// $user = new User();
-// $uid = $user->getUserId();
 
 // Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
@@ -22,54 +20,52 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
     $uname = $_POST['name'];
     $currentDate = date('Y-m-d');
 
-    $sql2 = "SELECT id FROM courses WHERE coursename = ?";
-    $stmt = $conn->prepare($sql2);
-    $stmt->bind_param("s", $selectedOption);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Retrieve the course ID from the 'courses' table
+    $sql1 = "SELECT id FROM courses WHERE coursename = ?";
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param("s", $selectedOption);
+    $stmt1->execute();
+    $result1 = $stmt1->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+    if ($result1->num_rows > 0) {
+        $row = $result1->fetch_assoc();
         $courseId = $row['id'];
 
+        // Check if the attendance record already exists for the user and course on the current date
         $sql2 = "SELECT * FROM attendances WHERE auserid = ? AND acourseid = ? AND aday = CURDATE()";
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bind_param("ii", $uname, $courseId);
         $stmt2->execute();
-        $result = $stmt2->get_result(); // Fetch the result set
+        $result2 = $stmt2->get_result();
 
-
-    
-       
-        if ($result->num_rows > 0) {
-        // The result set is not empty
-        $check = "use";
-        echo json_encode($check);
-        } else {
-            $sql = "INSERT INTO payments (suid, cid, aday, atime, createdAt, updatedAt)
-                VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ii", $uname, $courseId);
-        $stmt->execute();
-        // The result set is empty
-        if ($stmt->affected_rows > 0) {
-            $check = "Mark";
-            header('Content-Type: application/json');
+        if ($result2->num_rows > 0) {
+            // The attendance record exists
+            $check = "use";
             echo json_encode($check);
         } else {
-            $check = "Not Mark";
-            echo json_encode($check);
+            // Insert a new attendance record into the 'payments' table
+            $sql3 = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt) VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
+            $stmt3 = $conn->prepare($sql3);
+            $stmt3->bind_param("ii", $uname, $courseId);
+            $stmt3->execute();
+
+            if ($stmt3->affected_rows > 0) {
+                // The attendance record was inserted successfully
+                $check = "Mark";
+                header('Content-Type: application/json');
+                echo json_encode($check);
+            } else {
+                // Failed to insert the attendance record
+                $check = "Not Mark";
+                echo json_encode($check);
+            }
         }
-        }
-
-
-}
+    }
 }
 
-// Close the prepared statement and database connection
-$stmt->close();
+// Close the prepared statements and database connection
+$stmt1->close();
+$stmt2->close();
+$stmt3->close();
 $conn->close();
 ?>
-
-
