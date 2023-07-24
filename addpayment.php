@@ -32,7 +32,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         $row = $result->fetch_assoc();
         $courseId = $row['id'];
 
-        $sql2 = "SELECT * FROM payments WHERE cid = ? AND suid = ? AND month = CURDATE()";
+        $sql2 = "SELECT * FROM payments WHERE cid = ? AND suid = ? AND month = MONTH(CURDATE())";
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bind_param("ii", $courseId, $uname);
         $stmt2->execute();
@@ -47,7 +47,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         echo json_encode($check);
         } else {
             $sql = "INSERT INTO payments (cid, suid, month, createdAt, updatedAt)
-         VALUES (?, ?, CURDATE(), NOW(), NOW())";
+         VALUES (?, ?, MONTH(CURDATE()), NOW(), NOW())";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ii", $courseId, $uname);
