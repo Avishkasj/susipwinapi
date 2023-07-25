@@ -51,6 +51,11 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             $stmt->bind_param("ii", $courseId, $uname);
             $stmt->execute();
 
+        // The result set is empty
+        if ($stmt->affected_rows > 0) {
+            $check = "Mark";
+            header('Content-Type: application/json');
+
 
             //send sms
             $sql4 = "SELECT parentId FROM parentstudents WHERE studentid = ?";
@@ -74,13 +79,6 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
                     $tel = $row['tel'];
                 }
             }
-
-
-
-        // The result set is empty
-        if ($stmt->affected_rows > 0) {
-            $check = "Mark";
-            header('Content-Type: application/json');
             echo json_encode($check);
         } else {
             $check = "Not Mark";
