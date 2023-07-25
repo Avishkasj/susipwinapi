@@ -63,11 +63,11 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             $stmt = $conn->prepare($sql4);
             $stmt->bind_param("s", $uname);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $result4 = $stmt->get_result();
 
-            // if ($result->num_rows > 0) {
-            //     $row = $result->fetch_assoc();
-            //     $parent = $row['parentId'];
+            if ($result4->num_rows > 0) {
+                $row = $result4->fetch_assoc();
+                $parent = $row['parentId'];
 
             //     $sql5 = "SELECT tel FROM users WHERE id = ?";
             //     $stmt2 = $conn->prepare($sql5);
@@ -79,7 +79,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             //         $row = $result->fetch_assoc();
             //         $tel = $row['tel'];
             //     }
-            // }
+            }
 
 
 
