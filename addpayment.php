@@ -55,6 +55,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         if ($stmt->affected_rows > 0) {
             $check = "Mark";
             header('Content-Type: application/json');
+            echo json_encode($check);
 
 
             //send sms
@@ -83,36 +84,36 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
 
             // sms api call
 
-            // $api_url = 'http://sender.zirconhost.com/api/v2/send.php';
-            // $user_id = 105082;
-            // $api_key = 'xv8np326kfaw3uqjt';
-            // $sender_id = 'Encode99';
-            // $to = '0762697156';
-            // $message = 'hello';
+            $api_url = 'http://sender.zirconhost.com/api/v2/send.php';
+            $user_id = 105082;
+            $api_key = 'xv8np326kfaw3uqjt';
+            $sender_id = 'Encode99';
+            $to = '0762697156';
+            $message = 'hello';
 
-            // // Create the query string with the parameters
-            // $query_string = http_build_query([
-            //     'user_id' => $user_id,
-            //     'api_key' => $api_key,
-            //     'sender_id' => $sender_id,
-            //     'to' => $to,
-            //     'message' => $message,
-            // ]);
+            // Create the query string with the parameters
+            $query_string = http_build_query([
+                'user_id' => $user_id,
+                'api_key' => $api_key,
+                'sender_id' => $sender_id,
+                'to' => $to,
+                'message' => $message,
+            ]);
 
-            // // Construct the full URL with the query string
-            // $request_url = $api_url . '?' . $query_string;
+            // Construct the full URL with the query string
+            $request_url = $api_url . '?' . $query_string;
 
-            // // Send the GET request to the API
-            // $response = file_get_contents($request_url);
+            // Send the GET request to the API
+            $response = file_get_contents($request_url);
 
-            // // Check if the request was successful
-            // if ($response !== false) {
-            //     // API returned a response, you can check and process it here
-            //     echo "SMS sent successfully!";
-            // } else {
-            //     // Request failed
-            //     echo "Failed to send SMS.";
-            // }
+            // Check if the request was successful
+            if ($response !== false) {
+                // API returned a response, you can check and process it here
+                echo "SMS sent successfully!";
+            } else {
+                // Request failed
+                echo "Failed to send SMS.";
+            }
         
 
 
@@ -123,7 +124,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
 
 
 
-            echo json_encode($check);
+            
         } else {
             $check = "Not Mark";
             echo json_encode($check);
