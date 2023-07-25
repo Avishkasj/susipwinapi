@@ -90,14 +90,14 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             $api_key = 'xv8np326kfaw3uqjt';
             $sender_id = 'Encode99';
             $to = '0762697156';
-            $message = 'hello';
+            $message = 'hello Montly Pyment OK';
 
             // Create the query string with the parameters
             $query_string = http_build_query([
                 'user_id' => $user_id,
                 'api_key' => $api_key,
                 'sender_id' => $sender_id,
-                'to' => $to,
+                'to' => $tel,
                 'message' => $message,
             ]);
 
