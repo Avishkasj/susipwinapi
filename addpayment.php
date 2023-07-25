@@ -86,7 +86,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
 
             // sms api call
 
-            $cmonth = MONTH(CURDATE());
+            $cmonth = date('m');
             $api_url = 'http://sender.zirconhost.com/api/v2/send.php';
             $user_id = 105082;
             $api_key = 'xv8np326kfaw3uqjt';
