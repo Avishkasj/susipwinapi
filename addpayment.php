@@ -58,7 +58,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             echo json_encode($check);
 
 
-            send sms
+            //send sms
             $sql4 = "SELECT parentId FROM parentstudents WHERE studentid = ?";
             $stmt = $conn->prepare($sql4);
             $stmt->bind_param("s", $uname);
