@@ -78,7 +78,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
                 if ($result9->num_rows > 0) {
                     $row = $result9->fetch_assoc(); // Corrected variable to use $result9
                     $tel = $row['tel'];
-                    $pname= $row['username'];
+                    $pname= $row['fullname'];
                 }
             }
 
@@ -92,7 +92,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             $api_key = 'xv8np326kfaw3uqjt';
             $sender_id = 'Encode99';
             $to = '0762697156';
-            $message = 'hello '.$pname.'Your Child Make payemnt For '.$selectedOption.'Month: '.$cmonth;
+            $message = 'hello '.$pname.'Your Child Make payemnt For '.$selectedOption.' Month: '.$cmonth;
 
             // Create the query string with the parameters
             $query_string = http_build_query([
