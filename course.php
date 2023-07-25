@@ -39,7 +39,7 @@ if(isset($_POST['data'])) {
     // registerd course 
     $sql2 = "SELECT t1.coursename
     FROM courses t1
-    INNER JOIN coursestudents t2 ON t1.id = t2.courseId
+    INNER JOIN coursestudents t2 ON t1.id = t2.courseId AND t2.aprovel='1'
     WHERE t2.userId = '$user_id'";
 
 
