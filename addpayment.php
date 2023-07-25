@@ -58,27 +58,27 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
 
 
             //send sms
-            $sql4 = "SELECT parentId FROM parentstudents WHERE studentid = ?";
-            $stmt = $conn->prepare($sql4);
-            $stmt->bind_param("s", $uname);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            // $sql4 = "SELECT parentId FROM parentstudents WHERE studentid = ?";
+            // $stmt = $conn->prepare($sql4);
+            // $stmt->bind_param("s", $uname);
+            // $stmt->execute();
+            // $result = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $parent = $row['parentId'];
+            // if ($result->num_rows > 0) {
+            //     $row = $result->fetch_assoc();
+            //     $parent = $row['parentId'];
 
-                $sql5 = "SELECT tel FROM users WHERE id = ?";
-                $stmt2 = $conn->prepare($sql5);
-                $stmt2->bind_param("ii", $parent);
-                $stmt2->execute();
-                $result = $stmt2->get_result();
+            //     $sql5 = "SELECT tel FROM users WHERE id = ?";
+            //     $stmt2 = $conn->prepare($sql5);
+            //     $stmt2->bind_param("ii", $parent);
+            //     $stmt2->execute();
+            //     $result = $stmt2->get_result();
 
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $tel = $row['tel'];
-                }
-            }
+            //     if ($result->num_rows > 0) {
+            //         $row = $result->fetch_assoc();
+            //         $tel = $row['tel'];
+            //     }
+            // }
 
 
             // sms api call
