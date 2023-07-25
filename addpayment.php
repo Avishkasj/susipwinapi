@@ -75,10 +75,10 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
                 $stmt2->execute();
                 $result9 = $stmt2->get_result();
 
-            //     if ($result->num_rows > 0) {
-            //         $row = $result->fetch_assoc();
-            //         $tel = $row['tel'];
-            //     }
+                if ($result9->num_rows > 0) {
+                    $row = $result9->fetch_assoc(); // Corrected variable to use $result9
+                    $tel = $row['tel'];
+                }
             }
 
 
