@@ -101,11 +101,11 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
                 'message' => $message,
             ]);
 
-            // // Construct the full URL with the query string
-            // $request_url = $api_url . '?' . $query_string;
+            // Construct the full URL with the query string
+            $request_url = $api_url . '?' . $query_string;
 
-            // // Send the GET request to the API
-            // $response = file_get_contents($request_url);
+            // Send the GET request to the API
+            $response = file_get_contents($request_url);
 
             // // Check if the request was successful
             // if ($response !== false) {
