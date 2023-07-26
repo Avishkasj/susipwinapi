@@ -92,7 +92,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             $sender_id = 'Encode99';
             $to = '0762697156';
             $currentMonthAndYear = date('F Y');
-            $message = 'hello '.$pname.'Payment Done Successfully For '.$selectedOption.' Month: '.$currentMonthAndYear;
+            $message = $pname.'Payment Done Successfully For '.$selectedOption.' Month: '.$currentMonthAndYear;
 
             // Create the query string with the parameters
             $query_string = http_build_query([
