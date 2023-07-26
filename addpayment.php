@@ -91,7 +91,8 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
             $api_key = 'xv8np326kfaw3uqjt';
             $sender_id = 'Encode99';
             $to = '0762697156';
-            $message = 'hello '.$pname.'Your Child Make payemnt For '.$selectedOption.' Month: '.$cmonth;
+            $currentMonthAndYear = date('F Y');
+            $message = 'hello '.$pname.'Payment Done Successfully For '.$selectedOption.' Month: '.$currentMonthAndYear;
 
             // Create the query string with the parameters
             $query_string = http_build_query([
