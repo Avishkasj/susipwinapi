@@ -46,7 +46,7 @@ if (isset($_POST['data']) && isset($_POST['name'])) {
         echo json_encode($check);
         } else {
             $sql = "INSERT INTO attendances (auserid, acourseid, aday, atime, createdAt, updatedAt)
-                VALUES (?, ?, CURDATE(), '09:00:00', NOW(), NOW())";
+                VALUES (?, ?, CURDATE(), NOW(), NOW(), NOW())";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $uname, $courseId);
