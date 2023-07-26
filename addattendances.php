@@ -9,7 +9,6 @@ $database = "encodeor_tuition";
 // $user = new User();
 // $uid = $user->getUserId();
 
-// Create a new MySQLi instance and connect to the database
 $conn = new mysqli($servername, $username, $password, $database);
 
 // Check the connection

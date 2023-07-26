@@ -7,22 +7,21 @@ $username = "encodeor";
 $password = "CoY738RWk-+7pl";
 $database = "encodeor_tuition";
 
-// Create a new MySQLi instance and connect to the database
+
 $conn = new mysqli($servername, $username, $password, $database);
 
-// Check the connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve the data sent from the mobile app
+
 if(isset($_POST['data'])) {
     $json_data = $_POST['data'];
 
-    // Decode the JSON data into a PHP associative array
+
     $data = json_decode($json_data, true);
-    
-    // Assign each value to a separate variable
+   
     $user_id = $data['userid'];
     $user = new User();
     $user->setUserId($user_id);
@@ -52,10 +51,10 @@ if(isset($_POST['data'])) {
             }
         }
 
-    // Write session data to storage and close session file
+    
     session_write_close();
 
-    // Send the JSON response back to the Flutter app
+
     header('Content-Type: application/json');
     echo json_encode($data2);
 
