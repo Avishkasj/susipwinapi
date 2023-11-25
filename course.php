@@ -28,7 +28,6 @@ if(isset($_POST['data'])) {
 
     $_SESSION['user_id'] = $user_id;
     // $course_id = $data['courses'];
-  
    
 
     // registerd course 
