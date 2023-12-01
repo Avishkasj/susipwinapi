@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 );
             }
 
-            // header('Content-Type: application/json');
+
             echo json_encode($data);
         } else {
             $response = array('error' => 'No data found');
