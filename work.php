@@ -1,6 +1,6 @@
 <?php
 
-// Define the database connection parameters
+
 $servername = "encode99.org.lk";
 $username = "encodeor";
 $password = "CoY738RWk-+7pl";
